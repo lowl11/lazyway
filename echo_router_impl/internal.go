@@ -9,12 +9,16 @@ import (
 )
 
 func (client *Client) handler(ctx echo.Context) error {
+	request := ctx.Request()
+
+	// get need data for certain route
 	hosts := ctx.Get("gateway_hosts").([]string)
 	contentType := ctx.Get("content_type").(string)
 
+	// read request body is exist
 	var requestBodyInBytes []byte
-	if ctx.Request().Body != nil {
-		requestBody, err := ioutil.ReadAll(ctx.Request().Body)
+	if request.Body != nil {
+		requestBody, err := ioutil.ReadAll(request.Body)
 		if err != nil {
 			return client.Error(ctx, err, "[Gateway] Parse request body error")
 		}
@@ -24,10 +28,22 @@ func (client *Client) handler(ctx echo.Context) error {
 		}
 	}
 
-	sendHost := hosts[rand.Intn(len(hosts))]
-	sendUrl := sendHost + ctx.Request().URL.String()
+	// headers (with cookies)
+	headers := make(map[string]string)
+	for key, value := range request.Header {
+		if len(value) > 0 {
+			headers[key] = value[0]
+		}
+	}
 
-	response, err := requests.New(ctx.Request().Method, sendUrl, requestBodyInBytes).Send()
+	// choose need host
+	sendHost := hosts[rand.Intn(len(hosts))]
+	sendUrl := sendHost + request.URL.String()
+
+	// send request
+	response, err := requests.New(request.Method, sendUrl, requestBodyInBytes).
+		Headers(headers).
+		Send()
 	if err != nil {
 		return client.Error(ctx, err, "[Gateway] Send request to another host error")
 	}
