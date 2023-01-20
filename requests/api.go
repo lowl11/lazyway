@@ -18,12 +18,12 @@ func (service *Service) Cookie(key, value string) *Service {
 	return service
 }
 
-func (service *Service) Headers(headers map[string]string) *Service {
+func (service *Service) Headers(headers map[string][]string) *Service {
 	service.headers = headers
 	return service
 }
 
-func (service *Service) Header(key, value string) *Service {
+func (service *Service) Header(key string, value ...string) *Service {
 	service.headers[key] = value
 	return service
 }

@@ -12,8 +12,10 @@ func (service *Service) setCookies() {
 }
 
 func (service *Service) setHeaders() {
-	for key, value := range service.cookies {
-		service.request.Header.Add(key, value)
+	for key, value := range service.headers {
+		for _, item := range value {
+			service.request.Header.Add(key, item)
+		}
 	}
 }
 

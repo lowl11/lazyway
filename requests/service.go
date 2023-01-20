@@ -7,7 +7,7 @@ type Service struct {
 	url    string
 	body   any
 
-	headers map[string]string
+	headers map[string][]string
 	cookies map[string]string
 
 	isBasicAuth bool
@@ -26,7 +26,7 @@ func New(method, url string, body any) *Service {
 		url:    url,
 		body:   body,
 
-		headers: make(map[string]string),
+		headers: make(map[string][]string),
 		cookies: make(map[string]string),
 	}
 }

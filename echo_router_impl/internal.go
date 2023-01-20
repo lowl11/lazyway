@@ -5,7 +5,6 @@ import (
 	"github.com/lowl11/lazy-gateway/requests"
 	"io/ioutil"
 	"math/rand"
-	"net/http"
 )
 
 func (client *Client) handler(ctx echo.Context) error {
@@ -29,11 +28,9 @@ func (client *Client) handler(ctx echo.Context) error {
 	}
 
 	// headers (with cookies)
-	headers := make(map[string]string)
+	headers := make(map[string][]string)
 	for key, value := range request.Header {
-		if len(value) > 0 {
-			headers[key] = value[0]
-		}
+		headers[key] = value
 	}
 
 	// choose need host
@@ -41,12 +38,12 @@ func (client *Client) handler(ctx echo.Context) error {
 	sendUrl := sendHost + request.URL.String()
 
 	// send request
-	response, err := requests.New(request.Method, sendUrl, requestBodyInBytes).
+	response, status, err := requests.New(request.Method, sendUrl, requestBodyInBytes).
 		Headers(headers).
-		Send()
+		SendStatus()
 	if err != nil {
 		return client.Error(ctx, err, "[Gateway] Send request to another host error")
 	}
 
-	return ctx.Blob(http.StatusOK, contentType, response)
+	return ctx.Blob(status, contentType, response)
 }
