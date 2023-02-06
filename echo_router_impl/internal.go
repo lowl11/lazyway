@@ -12,6 +12,7 @@ func (client *Client) handler(ctx echo.Context) error {
 
 	// get need data for certain route
 	hosts := ctx.Get("gateway_hosts").([]string)
+	port := ctx.Get("gateway_port").(string)
 	contentType := ctx.Get("content_type").(string)
 
 	// read request body is exist
@@ -35,7 +36,7 @@ func (client *Client) handler(ctx echo.Context) error {
 
 	// choose need host
 	sendHost := hosts[rand.Intn(len(hosts))]
-	sendUrl := sendHost + request.URL.String()
+	sendUrl := sendHost + port + request.URL.String()
 
 	// send request
 	response, status, err := requests.New(request.Method, sendUrl, requestBodyInBytes).

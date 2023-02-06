@@ -4,12 +4,13 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (client *Client) SetRoute(pattern, contentType string, hosts []string) {
+func (client *Client) SetRoute(pattern, contentType string, hosts []string, port string) {
 	group := client.server.Group(pattern)
 
 	group.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(ctx echo.Context) error {
 			ctx.Set("gateway_hosts", hosts)
+			ctx.Set("gateway_port", port)
 			ctx.Set("content_type", contentType)
 
 			if err := next(ctx); err != nil {
