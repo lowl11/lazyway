@@ -1,6 +1,9 @@
 package routes
 
-import "strings"
+import (
+	"github.com/labstack/echo/v4"
+	"strings"
+)
 
 func (client *Client) Hosts() []string {
 	return client.hosts
@@ -13,6 +16,15 @@ func (client *Client) SetHosts(hosts ...string) *Client {
 
 func (client *Client) Port() string {
 	return client.port
+}
+
+func (client *Client) SetMiddleware(middlewareFunc echo.MiddlewareFunc) *Client {
+	client.middlewareFunc = middlewareFunc
+	return client
+}
+
+func (client *Client) Middleware() echo.MiddlewareFunc {
+	return client.middlewareFunc
 }
 
 func (client *Client) SetPort(port string) *Client {

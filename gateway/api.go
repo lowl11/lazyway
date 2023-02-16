@@ -5,5 +5,5 @@ import (
 )
 
 func (client *Client) Route(route *routes.Client) {
-	client.router.SetRoute(route.Pattern(), route.ContentType(), route.Hosts(), route.Port())
+	client.router.SetRoute(route.Pattern(), route.ContentType(), route.Hosts(), route.Port(), route.Middleware())
 }

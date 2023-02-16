@@ -1,13 +1,17 @@
 package routes
 
-import "net/http"
+import (
+	"github.com/labstack/echo/v4"
+	"net/http"
+)
 
 type Client struct {
-	pattern     string
-	hosts       []string
-	port        string
-	methods     []string
-	contentType string
+	pattern        string
+	hosts          []string
+	port           string
+	methods        []string
+	contentType    string
+	middlewareFunc echo.MiddlewareFunc
 }
 
 func Create(pattern string) *Client {
