@@ -1,7 +1,7 @@
 package gateway
 
 import (
-	"github.com/lowl11/lazy-gateway/routes"
+	"github.com/lowl11/lazyway/routes"
 )
 
 func (client *Client) Route(route *routes.Client) {

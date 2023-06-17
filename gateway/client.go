@@ -1,7 +1,7 @@
 package gateway
 
 import (
-	"github.com/lowl11/lazy-gateway/interfaces"
+	"github.com/lowl11/lazyway/interfaces"
 )
 
 type Client struct {

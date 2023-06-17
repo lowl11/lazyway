@@ -2,9 +2,9 @@ package lazyway
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/lowl11/lazy-gateway/echo_router_impl"
-	"github.com/lowl11/lazy-gateway/gateway"
-	"github.com/lowl11/lazy-gateway/routes"
+	"github.com/lowl11/lazyway/echo_router_impl"
+	"github.com/lowl11/lazyway/gateway"
+	"github.com/lowl11/lazyway/routes"
 )
 
 func Echo(server *echo.Echo) *gateway.Client {

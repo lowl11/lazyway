@@ -2,7 +2,7 @@ package echo_router_impl
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/lowl11/lazy-gateway/requests"
+	"github.com/lowl11/lazyway/requests"
 	"io/ioutil"
 	"math/rand"
 )

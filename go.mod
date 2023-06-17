@@ -1,4 +1,4 @@
-module github.com/lowl11/lazy-gateway
+module github.com/lowl11/lazyway
 
 go 1.18
 

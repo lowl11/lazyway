@@ -2,8 +2,8 @@ package echo_router_impl
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/lowl11/lazy-gateway/echo_router_impl/controller"
-	"github.com/lowl11/lazy-gateway/interfaces"
+	"github.com/lowl11/lazyway/echo_router_impl/controller"
+	"github.com/lowl11/lazyway/interfaces"
 )
 
 type Client struct {
