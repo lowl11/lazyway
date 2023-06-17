@@ -4,7 +4,12 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (client *Client) SetRoute(pattern, contentType string, hosts []string, port string, middlewareFunc echo.MiddlewareFunc) {
+func (client *Client) SetRoute(
+	pattern, contentType string,
+	hosts []string,
+	port string,
+	middlewareFunc echo.MiddlewareFunc,
+) {
 	group := client.server.Group(pattern)
 
 	// custom middleware
