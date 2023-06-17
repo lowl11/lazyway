@@ -1,4 +1,4 @@
-# lazy-gateway
+# lazyway
 > Library for making gateway requests
 
 ## Example
